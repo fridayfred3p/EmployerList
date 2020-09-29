@@ -14,6 +14,8 @@ const teamMembers = [];
 
 const idArray = [];
 
+function appMenu(){
+
 function createManager() {
     inquirer.prompt(
     [
@@ -213,12 +215,15 @@ function addIntern () {
 
             createTeam();
         }))
-    
+
+
 }
 
 createManager();
 
+};
 
+appMenu();
 
 
 // Write code to use inquirer to gather information about the development team members,
