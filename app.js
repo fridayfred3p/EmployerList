@@ -8,13 +8,60 @@ const fs = require("fs");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-const render = require("./lib/htmlRenderer");
+const {render, renderManager} = require("./lib/htmlRenderer");
 
 const teamMembers = [];
 
 const idArray = [];
 
-
+inquirer.prompt(
+    [
+        {
+            type: "input",
+            message: "Please give the Manager a name:",
+            name: "managerName",
+            validate: function(answer) {
+                if (answer !== "") {
+                    return true;
+                };
+                return "Please enter at least one character for a name";
+            }
+        },
+        {
+            type: "input",
+            message: "Please give the manager an id",
+            name: "managerId",
+            validate: function(answer) {
+                if (answer !== "") {
+                    return true;
+                };
+                return "Please enter at least one character for a id";
+            }
+        },
+        {
+            type: "input",
+            message: "Please give the manager's email address",
+            name: "managerEmail",
+            validate: function(answer) {
+                if (answer !== "") {
+                    return true;
+                };
+                return "Please enter the email address";
+            }
+        },
+        {
+            type: "input",
+            message: "Please input manager's office number",
+            name: "managerOfficeNumber",
+            validate: function(answer) {
+                if (answer !== "") {
+                    return true;
+                };
+                return "Please enter the manager's office number";
+            }
+        }
+    ]
+)
 
 
 // Write code to use inquirer to gather information about the development team members,
