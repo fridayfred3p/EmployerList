@@ -14,7 +14,8 @@ const teamMembers = [];
 
 const idArray = [];
 
-inquirer.prompt(
+function createManager() {
+    inquirer.prompt(
     [
         {
             type: "input",
@@ -59,61 +60,165 @@ inquirer.prompt(
                 };
                 return "Please enter the manager's office number";
             }
-        },
-        {
-            type: "input",
-            message: "Please give the Engineer's Name",
-            name: "engineerName",
-            validate: function(answer) {
-                if (answer !== "") {
-                    return true;
-                };
-                return "Please enter the engineer's name";
-            }
-
-        },
-        {
-            type: "input",
-            message: "Please give the Engineer's Id",
-            name: "engineerId",
-            validate: function(answer) {
-                if (answer !== "") {
-                    return true;
-                };
-                return "Please enter the engineer's id";
-            }
-        },
-        {
-            type: "input",
-            message: "Please give the Engineer's Github username",
-            name: "github",
-            validate: function(answer) {
-                if (answer !== "") {
-                    return true;
-                };
-                return "Please enter the engineer's github username";
-            }
-
-        },
-        {
-            type: "input",
-            message: "Please give the Engineer's email",
-            name: "engineerEmail",
-            validate: function(answer) {
-                if (answer !== "") {
-                    return true;
-                };
-                return "Please enter the engineer's email address";
-            }
-
         }
     ]
-).then(function(answers) {
+).then((answers => {
     const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
-    console.log(manager);
-    const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.github);
-    console.log(engineer);
-})
+    
+    teamMembers.push.manager;
+
+    createTeam();
+    }))
+};
+
+function createTeam () {
+    inquirer.prompt (
+        [
+            {
+                type: "list",
+                name: "memberChoice",
+                message: "Which team member would you like to add",
+                choices: [
+                    "Engineer",
+                    "Intern",
+                    "I don't want to add more team members"
+                ]
+            }
+
+    ]).then(userChoice => {
+        switch(userChoice.memberChoice) {
+            case "Engineer":
+                addEngineer();
+                break;
+            case "Intern":
+                addIntern();
+                break;
+            default:
+                buildteam();
+        };
+    });
+
+};   
+
+function addEngineer() {
+    inquirer.prompt(
+        [
+            {
+                
+                    type: "input",
+                    message: "Please give the Engineer's Name",
+                    name: "engineerName",
+                    validate: function(answer) {
+                        if (answer !== "") {
+                            return true;
+                        };
+                        return "Please enter the engineer's name";
+                    }
+        
+                },
+                {
+                    type: "input",
+                    message: "Please give the Engineer's Id",
+                    name: "engineerId",
+                    validate: function(answer) {
+                        if (answer !== "") {
+                            return true;
+                        };
+                        return "Please enter the engineer's id";
+                    }
+                },
+                {
+                    type: "input",
+                    message: "Please give the Engineer's Github username",
+                    name: "github",
+                    validate: function(answer) {
+                        if (answer !== "") {
+                            return true;
+                        };
+                        return "Please enter the engineer's github username";
+                    }
+        
+                },
+                {
+                    type: "input",
+                    message: "Please give the Engineer's email",
+                    name: "engineerEmail",
+                    validate: function(answer) {
+                        if (answer !== "") {
+                            return true;
+                        };
+                        return "Please enter the engineer's email address";
+                    }
+                }
+        ]).then((answers => {
+            const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.github);
+        
+            teamMembers.push.engineer;
+
+            createTeam();
+        }))
+}
+    
+function addIntern () {
+    inquirer.prompt(
+        [
+            {
+                type: "input",
+                message: "Please give the Intern a name",
+                name: "internName",
+                validate: function(answer) {
+                    if (answer !== "") {
+                        return true;
+                    };
+                    return "Please enter the engineer's email address";
+                }
+            },
+            {
+                type: "input",
+                message: "Please give the Intern an Id",
+                name: "internId",
+                validate: function(answer) {
+                    if (answer !== "") {
+                        return true;
+                    };
+                    return "Please enter the intern's Id";
+                }
+            },
+            {
+                type: "input",
+                message: "Please give the Intern an email address",
+                name: "internEmail",
+                validate: function(answer) {
+                    if (answer !== "") {
+                        return true;
+                    };
+                    return "Please enter the Intern's email address";
+                }
+            },
+            {
+                type: "input",
+                message: "Which school did the Intern graduate from",
+                name: "internSchool",
+                validate: function(answer) {
+                    if (answer !== "") {
+                        return true;
+                    };
+                    return "Please enter the Intern's school";
+                }
+            }
+        ]).then((answers => {
+            const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
+        
+            teamMembers.push.intern; 
+
+            createTeam();
+        }))
+    
+}
+
+createManager();
+
+
 
 
 // Write code to use inquirer to gather information about the development team members,
