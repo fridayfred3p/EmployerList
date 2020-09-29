@@ -59,9 +59,61 @@ inquirer.prompt(
                 };
                 return "Please enter the manager's office number";
             }
+        },
+        {
+            type: "input",
+            message: "Please give the Engineer's Name",
+            name: "engineerName",
+            validate: function(answer) {
+                if (answer !== "") {
+                    return true;
+                };
+                return "Please enter the engineer's name";
+            }
+
+        },
+        {
+            type: "input",
+            message: "Please give the Engineer's Id",
+            name: "engineerId",
+            validate: function(answer) {
+                if (answer !== "") {
+                    return true;
+                };
+                return "Please enter the engineer's id";
+            }
+        },
+        {
+            type: "input",
+            message: "Please give the Engineer's Github username",
+            name: "github",
+            validate: function(answer) {
+                if (answer !== "") {
+                    return true;
+                };
+                return "Please enter the engineer's github username";
+            }
+
+        },
+        {
+            type: "input",
+            message: "Please give the Engineer's email",
+            name: "engineerEmail",
+            validate: function(answer) {
+                if (answer !== "") {
+                    return true;
+                };
+                return "Please enter the engineer's email address";
+            }
+
         }
     ]
-)
+).then(function(answers) {
+    const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
+    console.log(manager);
+    const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.github);
+    console.log(engineer);
+})
 
 
 // Write code to use inquirer to gather information about the development team members,
