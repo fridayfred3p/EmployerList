@@ -65,7 +65,7 @@ function createManager() {
 ).then((answers => {
     const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.managerOfficeNumber);
     
-    teamMembers.push.manager;
+    teamMembers.push(manager);
 
     createTeam();
     }))
@@ -153,7 +153,7 @@ function addEngineer() {
         ]).then((answers => {
             const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.github);
         
-            teamMembers.push.engineer;
+            teamMembers.push(engineer);
 
             createTeam();
         }))
@@ -209,7 +209,7 @@ function addIntern () {
         ]).then((answers => {
             const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
         
-            teamMembers.push.intern; 
+            teamMembers.push(intern); 
 
             createTeam();
         }))
@@ -218,6 +218,7 @@ function addIntern () {
 }
 function buildTeam() {
     fs.writeFileSync(outputPath, render(teamMembers), "utf-8")
+
 }
 
 createManager();
